@@ -9,6 +9,8 @@ class BaseExtractor:
     endpoint = ""
     output_folder = ""
 
+    params = {}
+
     def __init__(self):
         self.client = GitHubClient()
 
@@ -75,13 +77,19 @@ class BaseExtractor:
             else f"/repos/{owner}/{repo}"
         )
 
+        print(f"Endpoint: {endpoint}")
+
         if self.endpoint == "":
             return self.client.get(endpoint)
 
-        return self.client.get_all_pages(
+        data = self.client.get_all_pages(
             endpoint,
             params=self.params
         )
+
+        print(f"Returned {len(data) if isinstance(data, list) else 'dict'} records")
+
+        return data
 
     def extract(self):
 

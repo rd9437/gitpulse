@@ -66,16 +66,16 @@
     "releases_url": "https://api.github.com/repos/tensorflow/tensorflow/releases{/id}",
     "deployments_url": "https://api.github.com/repos/tensorflow/tensorflow/deployments",
     "created_at": "2015-11-07T01:19:20Z",
-    "updated_at": "2026-07-18T06:54:24Z",
-    "pushed_at": "2026-07-18T07:17:49Z",
+    "updated_at": "2026-07-18T14:28:09Z",
+    "pushed_at": "2026-07-18T14:23:17Z",
     "git_url": "git://github.com/tensorflow/tensorflow.git",
     "ssh_url": "git@github.com:tensorflow/tensorflow.git",
     "clone_url": "https://github.com/tensorflow/tensorflow.git",
     "svn_url": "https://github.com/tensorflow/tensorflow",
     "homepage": "https://tensorflow.org",
-    "size": 1351121,
-    "stargazers_count": 196329,
-    "watchers_count": 196329,
+    "size": 1351138,
+    "stargazers_count": 196340,
+    "watchers_count": 196340,
     "language": "C++",
     "has_issues": true,
     "has_projects": true,
@@ -83,11 +83,11 @@
     "has_wiki": false,
     "has_pages": false,
     "has_discussions": false,
-    "forks_count": 75542,
+    "forks_count": 75550,
     "mirror_url": null,
     "archived": false,
     "disabled": false,
-    "open_issues_count": 2775,
+    "open_issues_count": 2790,
     "license": {
         "key": "apache-2.0",
         "name": "Apache License 2.0",
@@ -111,9 +111,9 @@
         "tensorflow"
     ],
     "visibility": "public",
-    "forks": 75542,
-    "open_issues": 2775,
-    "watchers": 196329,
+    "forks": 75550,
+    "open_issues": 2790,
+    "watchers": 196340,
     "default_branch": "master",
     "permissions": {
         "admin": false,
@@ -152,6 +152,6 @@
         "user_view_type": "public",
         "site_admin": false
     },
-    "network_count": 75542,
-    "subscribers_count": 7438
+    "network_count": 75550,
+    "subscribers_count": 7439
 }

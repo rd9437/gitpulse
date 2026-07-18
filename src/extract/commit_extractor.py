@@ -1,8 +1,8 @@
 from extract.base_extractor import BaseExtractor
 
 
-class ContributorExtractor(BaseExtractor):
+class CommitExtractor(BaseExtractor):
 
-    endpoint = "contributors"
+    endpoint = "commits"
 
-    output_folder = "contributors"
+    output_folder = "commits"
