@@ -1,0 +1,27 @@
+[
+    {
+        "owner": "microsoft",
+        "repo": "vscode",
+        "category": "Developer Tools"
+    },
+    {
+        "owner": "apache",
+        "repo": "airflow",
+        "category": "Data Engineering"
+    },
+    {
+        "owner": "pandas-dev",
+        "repo": "pandas",
+        "category": "Data Science"
+    },
+    {
+        "owner": "numpy",
+        "repo": "numpy",
+        "category": "Data Science"
+    },
+    {
+        "owner": "tensorflow",
+        "repo": "tensorflow",
+        "category": "Machine Learning"
+    }
+]
