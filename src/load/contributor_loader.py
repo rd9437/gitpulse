@@ -16,6 +16,7 @@ class ContributorLoader:
             return
 
         insert_query = """
+
         INSERT INTO contributors (
 
             github_contributor_id,
@@ -35,6 +36,11 @@ class ContributorLoader:
             :account_type
 
         )
+
+        ON CONFLICT (snapshot_date, github_repo_id, github_contributor_id)
+
+        DO NOTHING
+
         """
 
         with self.engine.begin() as connection:

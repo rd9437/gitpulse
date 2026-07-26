@@ -11,7 +11,12 @@ class CommitLoader:
 
     def load(self, commits):
 
+        if not commits:
+            print("No commits found.")
+            return
+
         insert_query = """
+
         INSERT INTO commits (
 
             github_repo_id,
@@ -33,6 +38,18 @@ class CommitLoader:
             :commit_date
 
         )
+
+        ON CONFLICT (snapshot_date, sha)
+
+        DO UPDATE SET
+
+            github_repo_id = EXCLUDED.github_repo_id,
+            author_name = EXCLUDED.author_name,
+            author_email = EXCLUDED.author_email,
+            commit_message = EXCLUDED.commit_message,
+            commit_date = EXCLUDED.commit_date,
+            fetched_at = CURRENT_TIMESTAMP
+
         """
 
         with self.engine.begin() as connection:

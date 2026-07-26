@@ -9,13 +9,11 @@ class ReleaseLoader:
 
         self.engine = Database().get_engine()
 
-
     def load(self, releases):
 
         if not releases:
             print("No releases found.")
             return
-
 
         insert_query = """
 
@@ -43,8 +41,11 @@ class ReleaseLoader:
 
         )
 
-        """
+        ON CONFLICT (snapshot_date, github_release_id)
 
+        DO NOTHING
+
+        """
 
         with self.engine.begin() as connection:
 
@@ -52,6 +53,5 @@ class ReleaseLoader:
                 text(insert_query),
                 releases
             )
-
 
         print(f"Loaded {len(releases)} releases.")

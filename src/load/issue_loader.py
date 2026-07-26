@@ -9,13 +9,11 @@ class IssueLoader:
 
         self.engine = Database().get_engine()
 
-
     def load(self, issues):
 
         if not issues:
             print("No issues found.")
             return
-
 
         insert_query = """
 
@@ -45,8 +43,11 @@ class IssueLoader:
 
         )
 
-        """
+        ON CONFLICT (snapshot_date, github_issue_id)
 
+        DO NOTHING
+
+        """
 
         with self.engine.begin() as connection:
 
@@ -54,6 +55,5 @@ class IssueLoader:
                 text(insert_query),
                 issues
             )
-
 
         print(f"Loaded {len(issues)} issues.")

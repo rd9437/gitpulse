@@ -1,6 +1,7 @@
 from database.db import Database
 from sqlalchemy import text
 
+
 class RepositoryLoader:
 
     def __init__(self):
@@ -14,11 +15,10 @@ class RepositoryLoader:
 
         with self.engine.begin() as connection:
 
-            # -----------------------------
-            # Load repositories
-            # -----------------------------
+            # Repository snapshot
 
             repository_query = """
+
             INSERT INTO repositories (
 
                 github_repo_id,
@@ -58,6 +58,11 @@ class RepositoryLoader:
                 :updated_at
 
             )
+
+            ON CONFLICT (snapshot_date, github_repo_id)
+
+            DO NOTHING
+
             """
 
             connection.execute(
@@ -66,11 +71,10 @@ class RepositoryLoader:
             )
 
 
-            # -----------------------------
-            # Load repository topics
-            # -----------------------------
+            # Repository topics snapshot
 
             topic_query = """
+
             INSERT INTO repository_topics (
 
                 github_repo_id,
@@ -84,13 +88,17 @@ class RepositoryLoader:
                 :topic
 
             )
+
+            ON CONFLICT (snapshot_date, github_repo_id, topic)
+
+            DO NOTHING
+
             """
 
             connection.execute(
                 text(topic_query),
                 topics
             )
-
 
         print(f"Loaded {len(repositories)} repositories.")
         print(f"Loaded {len(topics)} topics.")

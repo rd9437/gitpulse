@@ -43,7 +43,7 @@ class RepositoryTransformer:
 
                 "forks": repo["forks_count"],
 
-                "watchers": repo["watchers_count"],
+                "watchers": repo["subscribers_count"],
 
                 "open_issues": repo["open_issues_count"],
 

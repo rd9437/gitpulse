@@ -11,19 +11,19 @@ DROP TABLE IF EXISTS contributors CASCADE;
 DROP TABLE IF EXISTS repositories CASCADE;
 
 
--- Repositories
+-- Repositories (Daily Snapshot)
 
 CREATE TABLE repositories (
 
     id BIGSERIAL PRIMARY KEY,
 
-    github_repo_id BIGINT UNIQUE NOT NULL,
+    github_repo_id BIGINT NOT NULL,
 
     owner VARCHAR(100) NOT NULL,
 
     name VARCHAR(200) NOT NULL,
 
-    full_name VARCHAR(250) UNIQUE NOT NULL,
+    full_name VARCHAR(250) NOT NULL,
 
     description TEXT,
 
@@ -47,11 +47,16 @@ CREATE TABLE repositories (
 
     updated_at TIMESTAMP,
 
-    fetched_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    snapshot_date DATE NOT NULL DEFAULT CURRENT_DATE,
+
+    fetched_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    UNIQUE (snapshot_date, github_repo_id)
+
 );
 
 
--- Contributors
+-- Contributors (Daily Snapshot)
 
 CREATE TABLE contributors (
 
@@ -67,11 +72,22 @@ CREATE TABLE contributors (
 
     account_type VARCHAR(50),
 
-    fetched_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    snapshot_date DATE NOT NULL DEFAULT CURRENT_DATE,
+
+    fetched_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    UNIQUE (
+
+        snapshot_date,
+        github_repo_id,
+        github_contributor_id
+
+    )
+
 );
 
 
--- Commits
+-- Commits (Daily Snapshot)
 
 CREATE TABLE commits (
 
@@ -89,11 +105,21 @@ CREATE TABLE commits (
 
     commit_date TIMESTAMP,
 
-    fetched_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    snapshot_date DATE NOT NULL DEFAULT CURRENT_DATE,
+
+    fetched_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    UNIQUE (
+
+        snapshot_date,
+        sha
+
+    )
+
 );
 
 
--- Issues
+-- Issues (Daily Snapshot)
 
 CREATE TABLE issues (
 
@@ -115,11 +141,21 @@ CREATE TABLE issues (
 
     closed_at TIMESTAMP,
 
-    fetched_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    snapshot_date DATE NOT NULL DEFAULT CURRENT_DATE,
+
+    fetched_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    UNIQUE (
+
+        snapshot_date,
+        github_issue_id
+
+    )
+
 );
 
 
--- Pull Requests
+-- Pull Requests (Daily Snapshot)
 
 CREATE TABLE pull_requests (
 
@@ -141,11 +177,21 @@ CREATE TABLE pull_requests (
 
     closed_at TIMESTAMP,
 
-    fetched_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    snapshot_date DATE NOT NULL DEFAULT CURRENT_DATE,
+
+    fetched_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    UNIQUE (
+
+        snapshot_date,
+        github_pr_id
+
+    )
+
 );
 
 
--- Releases
+-- Releases (Daily Snapshot)
 
 CREATE TABLE releases (
 
@@ -165,11 +211,21 @@ CREATE TABLE releases (
 
     published_at TIMESTAMP,
 
-    fetched_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    snapshot_date DATE NOT NULL DEFAULT CURRENT_DATE,
+
+    fetched_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    UNIQUE (
+
+        snapshot_date,
+        github_release_id
+
+    )
+
 );
 
 
--- Languages
+-- Languages (Daily Snapshot)
 
 CREATE TABLE languages (
 
@@ -181,10 +237,22 @@ CREATE TABLE languages (
 
     bytes_of_code BIGINT,
 
-    fetched_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    snapshot_date DATE NOT NULL DEFAULT CURRENT_DATE,
+
+    fetched_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    UNIQUE (
+
+        snapshot_date,
+        github_repo_id,
+        language
+
+    )
+
 );
 
--- Repository Topics
+
+-- Repository Topics (Daily Snapshot)
 
 CREATE TABLE repository_topics (
 
@@ -194,5 +262,16 @@ CREATE TABLE repository_topics (
 
     topic VARCHAR(100) NOT NULL,
 
-    fetched_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    snapshot_date DATE NOT NULL DEFAULT CURRENT_DATE,
+
+    fetched_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    UNIQUE (
+
+        snapshot_date,
+        github_repo_id,
+        topic
+
+    )
+
 );

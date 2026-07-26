@@ -9,13 +9,11 @@ class PullRequestLoader:
 
         self.engine = Database().get_engine()
 
-
     def load(self, pull_requests):
 
         if not pull_requests:
             print("No pull requests found.")
             return
-
 
         insert_query = """
 
@@ -45,8 +43,11 @@ class PullRequestLoader:
 
         )
 
-        """
+        ON CONFLICT (snapshot_date, github_pr_id)
 
+        DO NOTHING
+
+        """
 
         with self.engine.begin() as connection:
 
@@ -54,6 +55,5 @@ class PullRequestLoader:
                 text(insert_query),
                 pull_requests
             )
-
 
         print(f"Loaded {len(pull_requests)} pull requests.")
