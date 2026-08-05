@@ -1,5 +1,8 @@
 # GitPulse
 
+[![Live Demo](https://img.shields.io/badge/Live-Demo-green?style=for-the-badge)](https://app.powerbi.com/view?r=eyJrIjoiNzdhODVjYmQtMjg4Ny00MGMzLWE4ZWItNmQyNTZhYjFjNjk0IiwidCI6ImFmN2U0MTYyLTFlZWQtNDEwZi04YmUxLTU1YzU5YTM4ZTQ2YSJ9&pageName=0677b7746b2af754166c)
+
+
 **An end-to-end GitHub Analytics ETL Pipeline** — extracts live repository data from the GitHub REST API, transforms it into an analytics-ready dimensional model, loads it into PostgreSQL, and visualizes it through interactive Power BI dashboards.
 
 ---
